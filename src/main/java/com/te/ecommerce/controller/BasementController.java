@@ -29,4 +29,10 @@ public class BasementController {
 		ecommerceResponse.setData(register);
 		return new ResponseEntity<EcommerceResponse>(ecommerceResponse, HttpStatus.CREATED);
 	}
+//	public ResponseEntity<EcommerceResponse> login(@RequestBody UserDto userDto) {
+//		User login = customerService.login(userDto);
+//		ecommerceResponse.setMessage("logged in successfully");
+//		ecommerceResponse.setData(login);
+//		return new ResponseEntity<>(ecommerceResponse, HttpStatus.ACCEPTED);
+//	}
 }

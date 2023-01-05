@@ -1,32 +1,27 @@
 package com.te.ecommerce.serviceimplementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.te.ecommerce.entity.Customer;
-import com.te.ecommerce.exception.CustomerException;
-import com.te.ecommerce.repository.CustomerRepository;
+
 import com.te.ecommerce.service.BasementService;
 
 @Service
 public class BasementServiceImplementation implements BasementService {
-	@Autowired
-	private CustomerRepository customerRepository;
-//	@Autowired
-//	private CartItemRepository cartItemRepository;
-//	@Autowired
-//	private CartRepository cartRepository;
 
-	@Override
-	public Boolean  register(Customer customer) {
-		Customer register=customerRepository.save(customer);
-		// CartCreation(customer.getId());
-		if (register != null) {
-			return true;
-			
-		}
-			throw new CustomerException(" unable to Registration");
+//	@Autowired
+//	private UserRepository userRepository;
 
-	}
+
+//	@Override
+//	public Boolean  register(Customer customer) {
+//		Customer register=basementService.save(customer);
+//		
+//		if (register != null) {
+//			return true;
+//			
+//		}
+//			throw new CustomerException(" unable to Registration");
+//
+//	}
 	
 //	// CreateCart
 //	public Cart CartCreation(@PathVariable String Id) {
@@ -50,5 +45,16 @@ public class BasementServiceImplementation implements BasementService {
 //		return save;
 //
 //	}
+//	@Override
+//	public User login(UserDto userDto) {
+//		User user = new User();
+//		BeanUtils.copyProperties(userDto, user);
+//		User userdata=userRepository.findById(user.getUsername())
+//				.orElseThrow(() -> new CustomerException(" Unable to login "));
+//		if((userdata.isEnabled())|| (user.isAccountNonLocked())) 
+//			return userdata;
+//		return null;
+//	}
+
 
 }

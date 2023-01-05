@@ -13,11 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Component
 public class CustomerDto {
-	private String id;
-	private String firstName;
-	private String lastName;
-	private long customerPhone;
-	
-	
+	private String customerId;
 
 }

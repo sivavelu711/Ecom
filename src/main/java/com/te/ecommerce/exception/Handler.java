@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.te.ecommerce.response.EcommerceResponse;
 
 @ControllerAdvice
-public class HandlerException {
+public class Handler {
 	@Autowired
 	EcommerceResponse ecommerceResponse;
 	
@@ -20,13 +20,13 @@ public class HandlerException {
 	}
 	
 	@ExceptionHandler(CustomerException.class)
-	public ResponseEntity<EcommerceResponse> CustomerException(CustomerException customerException){
+	public ResponseEntity<EcommerceResponse> customerException(CustomerException customerException){
 		ecommerceResponse.setMessage(customerException.getErrorMessage());
 		return new ResponseEntity<EcommerceResponse>(ecommerceResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@ExceptionHandler(CartItemException.class)
-	public ResponseEntity<EcommerceResponse> CartItemException(CartItemException cartItemException){
+	public ResponseEntity<EcommerceResponse> cartItemException(CartItemException cartItemException){
 		ecommerceResponse.setMessage(cartItemException.getErrorMessage());
 		return new ResponseEntity<EcommerceResponse>(ecommerceResponse, HttpStatus.ACCEPTED);
 	}

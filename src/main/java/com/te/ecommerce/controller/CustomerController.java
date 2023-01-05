@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +32,7 @@ public class CustomerController {
 	private BillingAddressService billingAddressService;
 
 	// ReadCustomerDetails API (NEED TO ACCESS BY ALL)
-	@GetMapping("/getCustomerDetails")
+	@PostMapping("/getCustomerDetails")
 	public ResponseEntity<EcommerceResponse> customerDetailsReading(@RequestBody CustomerDto customerDto) {
 		Customer readData = customerService.customerDetailsReading(customerDto);
 		ecommerceResponse.setMessage("Customer details fetched successfully");
@@ -57,7 +56,7 @@ public class CustomerController {
 	// DeleteCustomerdetails API
 	@DeleteMapping("/deleteCustomerDetails")
 	public ResponseEntity<EcommerceResponse> customerDetailsDeleting(@RequestBody CustomerDto customerDto) {
-		String customerDelete = customerService.customerDetailsDeleting(customerDto);
+		Customer customerDelete = customerService.customerDetailsDeleting(customerDto);
 		ecommerceResponse.setMessage("Customer details Deleted successfully");
 		ecommerceResponse.setStatus("200");
 		ecommerceResponse.setError(false);
@@ -65,7 +64,7 @@ public class CustomerController {
 		return new ResponseEntity<EcommerceResponse>(ecommerceResponse, HttpStatus.ACCEPTED);
 	}
 
-	// CreateShippingAddress API
+	// CreateShippingAddress API2
 	@PostMapping("/createShippingAddress")
 	public ResponseEntity<EcommerceResponse> shippingAddressCreation(
 			@RequestBody ShippingAddressDto shippingAddressDto) {
@@ -78,7 +77,7 @@ public class CustomerController {
 	}
 
 	// ReadShippingAddress API
-	@GetMapping("/getShippingAddress")
+	@PostMapping("/getShippingAddress")
 	public ResponseEntity<EcommerceResponse> shippingAddressFetching(
 			@RequestBody ShippingAddressDto shippingAddressDto) {
 		ShippingAddress readData = shippingAddressService.shippingAddressFetching(shippingAddressDto);
@@ -115,7 +114,7 @@ public class CustomerController {
 
 	// CreateBillingAddress API
 	@PostMapping("/createBillingAddress")
-	public ResponseEntity<EcommerceResponse> billingAddressCreation(@RequestBody BillingAddressDto billingAddressDto) {
+	public ResponseEntity<EcommerceResponse> billingAddressCreation( @RequestBody BillingAddressDto billingAddressDto) {
 		boolean addProduct = billingAddressService.billingAddressCreation(billingAddressDto);
 		ecommerceResponse.setMessage("billingAddress details added successfully");
 		ecommerceResponse.setStatus("200");
@@ -125,7 +124,7 @@ public class CustomerController {
 	}
 
 	// ReadBillingAddress API
-	@GetMapping("/getBillingAddress")
+	@PostMapping("/getBillingAddress")
 	public ResponseEntity<EcommerceResponse> billingAddressFetching(@RequestBody BillingAddressDto billingAddressDto) {
 		BillingAddress readData = billingAddressService.billingAddressFetching(billingAddressDto);
 		ecommerceResponse.setMessage("BillingAddress details fetched successfully");

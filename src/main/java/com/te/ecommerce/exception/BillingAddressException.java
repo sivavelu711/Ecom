@@ -1,7 +1,8 @@
 package com.te.ecommerce.exception;
 
+@SuppressWarnings("serial")
 public class BillingAddressException extends RuntimeException {
-	String errorMessage;
+	final String errorMessage;
 
 	public BillingAddressException(String errorMessage) {
 		super();

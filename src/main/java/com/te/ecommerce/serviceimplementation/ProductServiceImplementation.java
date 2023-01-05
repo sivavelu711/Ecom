@@ -1,5 +1,7 @@
 package com.te.ecommerce.serviceimplementation;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,6 @@ public class ProductServiceImplementation implements ProductService {
 		product.setName(productDto.getName());
 		product.setPrice(productDto.getPrice());
 		product.setUnit(productDto.getUnit());
-
 		Product save = productRepository.save(product);
 		if (save != null) {
 			return true;
@@ -38,18 +39,15 @@ public class ProductServiceImplementation implements ProductService {
 	@Override
 	public Product getProductDetails(ProductDto productDto) {
 		BeanUtils.copyProperties(productDto, product);
-		Product getDetail = productRepository.findById(product.getId()).orElse(null);
-		if (getDetail != null) {
-			return getDetail;
-		} 
-			throw new ProductException("Unable to fetch that product");
+		return productRepository.findById(product.getId())
+				.orElseThrow(()->new ProductException("Unable to fetch that product"));
 	}
 
 	@Override
 	public Product updateProductDetails(ProductDto productDto) {
 		BeanUtils.copyProperties(productDto, product);
-		Product updateDetail = productRepository.findById(product.getId()).orElse(null);
-		if (updateDetail != null) {
+		Product updateDetail = productRepository.findById(product.getId())
+				.orElseThrow(()->new ProductException("Unable to update product"));
 			product.setCategory(productDto.getCategory());
 			product.setDescription(productDto.getDescription());
 			product.setManufacturer(productDto.getManufacturer());
@@ -57,10 +55,8 @@ public class ProductServiceImplementation implements ProductService {
 			product.setPrice(productDto.getPrice());
 			product.setUnit(productDto.getUnit());
 			productRepository.save(product);
-			return product;
+			return updateDetail;
 		} 
-			throw new ProductException("Unable to update product");
-	}
 
 	@Override
 	public String deleteProductDetails(ProductDto productDto) {
@@ -71,6 +67,12 @@ public class ProductServiceImplementation implements ProductService {
 			return null;
 		} 
 			throw new ProductException("Unable to delete product or Already deleted");
+	}
+
+	@Override
+	public List<Product> getAllProduct() {
+		 return productRepository.findAll();
+		
 	}
 	
 

@@ -24,9 +24,8 @@ public class ShippingAddress {
 	private String state; 
 	private int zipcode; 
 	private String country;
-	
-//	@OneToOne(mappedBy = "shippingAddress")
+//	@OneToOne(cascade = CascadeType.ALL)
 //	private Customer customer;
-//	@OneToOne(mappedBy = "shippingAddress")
-//	private SalesOrder salesOrder;
+	
+
 }

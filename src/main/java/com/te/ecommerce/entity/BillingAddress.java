@@ -2,9 +2,7 @@ package com.te.ecommerce.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
 import org.springframework.stereotype.Component;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +23,6 @@ public class BillingAddress {
 	private int zipcode; 
 	private String country; 
 	
-//	@OneToOne(mappedBy = "billingAddress")
+//	@OneToOne(cascade = CascadeType.ALL)
 //	private Customer customer;
-//	
-//	@OneToOne(mappedBy = "billingAddress")
-//	private SalesOrder salesOrder;
-
-
 }

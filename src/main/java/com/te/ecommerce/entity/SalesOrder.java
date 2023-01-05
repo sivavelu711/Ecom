@@ -21,10 +21,7 @@ import lombok.Setter;
 public class SalesOrder {
 	@Id
 	private String id;
-//	private String cartId;
-//	private String customerId;
-//	private String shippingAddressId;
-//	private String billingAddressId;
+
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;

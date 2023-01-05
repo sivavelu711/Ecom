@@ -1,7 +1,8 @@
 package com.te.ecommerce.exception;
 
+@SuppressWarnings("serial")
 public class CartItemException extends RuntimeException {
-	String errorMessage;
+	final String errorMessage;
 
 	public CartItemException(String errorMessage) {
 		super();

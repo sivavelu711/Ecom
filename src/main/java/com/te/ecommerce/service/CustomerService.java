@@ -9,8 +9,9 @@ public interface CustomerService {
 
 	Customer customerDetailsUpdating(CustomerDto customerDto);
 
-	String customerDetailsDeleting(CustomerDto customerDto);
+	Customer customerDetailsDeleting(CustomerDto customerDto);
 
 	Boolean register(Customer customer);
+
 
 }

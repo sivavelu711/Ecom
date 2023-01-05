@@ -3,6 +3,7 @@ package com.te.ecommerce.serviceimplementation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.te.ecommerce.dto.ShippingAddressDto;
 import com.te.ecommerce.entity.ShippingAddress;
 import com.te.ecommerce.exception.ShippingAddressException;
@@ -15,6 +16,8 @@ public class ShippingAddressServiceImplementation implements ShippingAddressServ
 	private ShippingAddressRepository shippingAddressRepository;
 	@Autowired
 	private ShippingAddress shippingAddress;
+//	@Autowired
+//	private CustomerRepository customerRepository;
 
 	@Override
 	public boolean shippingAddressCreation(ShippingAddressDto shippingAddressDto) {
@@ -29,34 +32,24 @@ public class ShippingAddressServiceImplementation implements ShippingAddressServ
 		if (save != null) {
 			return true;
 		}
-			throw new ShippingAddressException("Address not created");
+		throw new ShippingAddressException("Address not created");
 	}
 
-	@Override
-	public ShippingAddress shippingAddressFetching(ShippingAddressDto shippingAddressDto) {
-		BeanUtils.copyProperties(shippingAddressDto, shippingAddress);
-		ShippingAddress getDetail = shippingAddressRepository.findById(shippingAddress.getId()).orElse(null);
-		if (getDetail != null) {
-			return getDetail;
-		}
-			throw new ShippingAddressException("Address not fetched");
-	}
+
 
 	@Override
 	public ShippingAddress shippingAddressUpdating(ShippingAddressDto shippingAddressDto) {
 		BeanUtils.copyProperties(shippingAddressDto, shippingAddress);
-		ShippingAddress updateDetail = shippingAddressRepository.findById(shippingAddress.getId()).orElse(null);
-		if (updateDetail != null) {
-			shippingAddress.setId(shippingAddressDto.getId());
-			shippingAddress.setAddress(shippingAddressDto.getAddress());
-			shippingAddress.setCity(shippingAddressDto.getCity());
-			shippingAddress.setState(shippingAddressDto.getState());
-			shippingAddress.setZipcode(shippingAddressDto.getZipcode());
-			shippingAddress.setCountry(shippingAddressDto.getCountry());
-			shippingAddressRepository.save(shippingAddress);
-			return shippingAddress;
-		}
-			throw new ShippingAddressException("Address not Updated");
+		ShippingAddress updateDetail = shippingAddressRepository.findById(shippingAddress.getId())
+				.orElseThrow(() -> new ShippingAddressException("Address not Updated"));
+		shippingAddress.setId(shippingAddressDto.getId());
+		shippingAddress.setAddress(shippingAddressDto.getAddress());
+		shippingAddress.setCity(shippingAddressDto.getCity());
+		shippingAddress.setState(shippingAddressDto.getState());
+		shippingAddress.setZipcode(shippingAddressDto.getZipcode());
+		shippingAddress.setCountry(shippingAddressDto.getCountry());
+		shippingAddressRepository.save(shippingAddress);
+		return updateDetail;
 	}
 
 	@Override
@@ -67,8 +60,14 @@ public class ShippingAddressServiceImplementation implements ShippingAddressServ
 			shippingAddressRepository.delete(shippingAddress);
 			return null;
 		}
-			throw new ShippingAddressException("Address not Updated");
+		throw new ShippingAddressException("Address not deleted");
 	}
-	
+
+	@Override
+	public ShippingAddress shippingAddressFetching(ShippingAddressDto shippingAddressDto) {
+		BeanUtils.copyProperties(shippingAddressDto, shippingAddress);
+		return shippingAddressRepository.findById(shippingAddress.getId())
+				.orElseThrow(() -> new ShippingAddressException("Address not fetched"));
+	}
 
 }

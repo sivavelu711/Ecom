@@ -11,33 +11,32 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Component
 @Entity
 public class Customer {
 	@Id
-	private String id;
+	private String customerId;
 	private String firstName;
 	private String lastName;
 	private long customerPhone;
-//	private String shippingAddressId;
-//	private String billingAddressId;
-//	private String userId;
-//	private String cartId;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@OneToOne(cascade = CascadeType.ALL )
 	private BillingAddress billingAddress;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private ShippingAddress shippingAddress;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private SalesOrder salesOrder;
 	
 }

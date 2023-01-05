@@ -12,10 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class UserDto {
-	private String id;
-	private String emailId;
-	private String password;
-	private boolean accountNonLocked;
-
+public class CartItemFetchDto {
+	private String cartItemId;
+	private String customerId;
 }

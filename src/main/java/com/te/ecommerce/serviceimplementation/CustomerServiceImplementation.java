@@ -17,11 +17,11 @@ public class CustomerServiceImplementation implements CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+
 	@Override
 	public Boolean register(Customer customer) {
-		// password need to generate by spring security
-		BeanUtils.copyProperties(customer, customer);
 		Customer save = customerRepository.save(customer);
+		
 		if (save != null) {
 			return true;
 		}
@@ -30,39 +30,39 @@ public class CustomerServiceImplementation implements CustomerService {
 
 	@Override
 	public Customer customerDetailsReading(CustomerDto customerDto) {
-
 		BeanUtils.copyProperties(customerDto, customer);
-		Customer getDetail = customerRepository.findById(customer.getId()).orElse(null);
-		if (getDetail != null) {
-			return getDetail;
-		}
-		throw new CustomerException("Unable to read Customer details");
+		return customerRepository.findById(customer.getCustomerId())
+				.orElseThrow(() -> new CustomerException("Unable to read Customer details"));
 	}
 
 	@Override
 	public Customer customerDetailsUpdating(CustomerDto customerDto) {
 		BeanUtils.copyProperties(customerDto, customer);
-		Customer updateDetail = customerRepository.findById(customer.getId()).orElse(null);
-		if (updateDetail != null) {
-			customer.setFirstName(customerDto.getFirstName());
-			customer.setLastName(customerDto.getLastName());
-			customer.setCustomerPhone(customerDto.getCustomerPhone());
-			customer.setId(customerDto.getId());
+		Customer updateDetail = customerRepository.findById(customer.getCustomerId())
+				.orElseThrow(()->new CustomerException("Unable to update Customer details"));
+
+			customer.setCustomerId(customerDto.getCustomerId());
 			customerRepository.save(customer);
-			return customer;
-		}
-		throw new CustomerException("Unable to update Customer details");
+			return updateDetail;
 	}
 
 	@Override
-	public String customerDetailsDeleting(CustomerDto customerDto) {
+	public Customer customerDetailsDeleting(CustomerDto customerDto) {
 		BeanUtils.copyProperties(customerDto, customer);
-		Customer deleteDetail = customerRepository.findById(customer.getId()).orElse(null);
-		if (deleteDetail != null) {
-			customerRepository.delete(deleteDetail);
+		Customer delete = customerRepository.findById(customer.getCustomerId()).orElseThrow(()->new CustomerException("Unable to delete Customer details"));
+			customerRepository.delete(delete);
 			return null;
 		}
-		throw new CustomerException("Unable to delete Customer details");
-	}
+
+//	@Override
+//	public User login(UserDto userDto) {
+//		User user = new User();
+//		BeanUtils.copyProperties(userDto, user);
+//		User userdata=userRepository.findById(user.getUsername())
+//				.orElseThrow(() -> new CustomerException(" Unable to login "));
+//		if((userdata.isEnabled())|| (user.isAccountNonLocked())) 
+//			return userdata;
+//		return null;
+//	}
 
 }

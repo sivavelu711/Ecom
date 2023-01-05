@@ -25,7 +25,6 @@ public class Product {
 	private String name;
 	private double price;
 	private int unit;
-//	@ManyToMany(mappedBy = "product")
-//	private List<CartItem> cartItem;
+
 
 }

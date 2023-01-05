@@ -1,5 +1,6 @@
 package com.te.ecommerce.exception;
 
+@SuppressWarnings("serial")
 public class ShippingAddressException extends RuntimeException {
 	String errorMessage;
 

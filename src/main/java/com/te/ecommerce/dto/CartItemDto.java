@@ -13,16 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Component
 public class CartItemDto {
+	//private String cartItemId;
+	//productId
 	private String id;
-	private int quantity;
-	private double price;
-	//private String id;
-	private String category;
-	private String description;
-	private String manufacturer;
-	private String name;
-	//private double price;
-	private int unit;
-	//private int quantity;
-
+	private Integer quantity;
+	private String customerId;
+	
+	
 }

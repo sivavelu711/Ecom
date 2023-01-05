@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Component
 public class CartDto {
-	private String id;
+	private String cartId;
 	private double totalPrice;
 
 }
